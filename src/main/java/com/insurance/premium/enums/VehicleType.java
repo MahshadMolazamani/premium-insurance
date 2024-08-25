@@ -2,6 +2,7 @@ package com.insurance.premium.enums;
 
 public enum VehicleType {
 
+    DEFAULT_FACTOR(1.0),
     CAR(1.0),
     TRUCK(1.2),
     MOTORCYCLE(1.3),

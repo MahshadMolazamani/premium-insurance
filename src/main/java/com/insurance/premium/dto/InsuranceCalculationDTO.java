@@ -1,5 +1,6 @@
 package com.insurance.premium.dto;
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.insurance.premium.enums.VehicleType;
 
 public record InsuranceCalculationDTO(
@@ -7,7 +8,7 @@ public record InsuranceCalculationDTO(
         Integer annualKilometers,
         String postcode,
         String registrationOffice,
-        VehicleType vehicleType,
+        @JsonDeserialize(using = VehicleTypeDeserializer.class) VehicleType vehicleType,
         Double calculatedPremium
 ) {
 }

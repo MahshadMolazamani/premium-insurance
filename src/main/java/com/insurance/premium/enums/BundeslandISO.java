@@ -3,6 +3,7 @@ package com.insurance.premium.enums;
 public enum BundeslandISO {
 
 
+    DE_DE(1.0, "Default"),
     DE_NI(1.2, "Niedersachsen"),
     DE_HB(0.8, "Bremen"),
     DE_BB(1.1, "Brandenburg"),
@@ -43,7 +44,6 @@ public enum BundeslandISO {
                 return iso;
             }
         }
-        throw new IllegalArgumentException("No enum constant for Bundesland: " + bundesland);
+        return BundeslandISO.DE_DE;
     }
-
 }
