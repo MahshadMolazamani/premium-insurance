@@ -39,6 +39,7 @@ public class RegionDataService {
 
                 RegionData regionData = new RegionData();
 
+                regionData.setBundeslandIso(columns[1]);
                 regionData.setBundesland(columns[2]);
                 regionData.setLand(columns[4]);
                 regionData.setStadt(columns[5]);

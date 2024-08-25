@@ -1,5 +1,6 @@
 package com.insurance.premium.entity;
 
+import com.insurance.premium.enums.VehicleType;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -22,7 +23,8 @@ public class InsuranceCalculation {
     private String registrationOffice;
 
     @Column(name = "vehicle_type")
-    private String vehicleType;
+    @Enumerated(EnumType.STRING)
+    private VehicleType vehicleType;
 
     @Column(name = "calculated_premium")
     private Double calculatedPremium;

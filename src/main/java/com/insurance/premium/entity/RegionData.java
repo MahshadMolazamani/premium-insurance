@@ -13,6 +13,9 @@ public class RegionData {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(name = "bundesland_iso")
+    private String bundeslandIso;
+
     @Column(name = "bundesland")
     private String bundesland;
 
