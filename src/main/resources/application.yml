@@ -24,9 +24,12 @@ spring:
         persistence:
           create-database-schemas: true
       hibernate:
-        generate_statistics: true
-        format_sql: true
-        naming-strategy: org.hibernate.cfg.ImprovedNamingStrategy
+        jdbc:
+          batch_size: 1000
+          batch_versioned_data: true
+        order_inserts: true
+        order_updates: true
+        generate_statistics: false
   sql:
     init:
       mode: always
