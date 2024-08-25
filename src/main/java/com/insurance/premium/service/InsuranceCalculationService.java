@@ -23,8 +23,8 @@ public class InsuranceCalculationService {
 
     public Optional<InsuranceCalculationDTO> calculateInsurance(InsuranceCalculationDTO insuranceCalculationDTO) {
 
-        Double calculatePremium = calculatePremium(insuranceCalculationDTO);
         InsuranceCalculation insuranceCalculation = toEntity(insuranceCalculationDTO);
+        Double calculatePremium = calculatePremium(insuranceCalculation);
         insuranceCalculation.setCalculatedPremium(calculatePremium);
 
         return Optional.ofNullable(insuranceCalculation)
@@ -32,11 +32,11 @@ public class InsuranceCalculationService {
                 .map(this::toDTO);
     }
 
-    private Double calculatePremium(InsuranceCalculationDTO calculationDTO) {
+    private Double calculatePremium(InsuranceCalculation calculation) {
 
-        Double kilometerFactor = getKilometerFactor(calculationDTO.annualKilometers());
-        Double vehicleFactor = calculationDTO.vehicleType().getVehicleFactor();
-        Double regionFactor = BundeslandISO.fromBundesland(calculationDTO.registrationOffice()).getRegionFactor();
+        Double kilometerFactor = getKilometerFactor(calculation.getAnnualKilometers());
+        Double vehicleFactor = calculation.getVehicleType().getVehicleFactor();
+        Double regionFactor = BundeslandISO.fromBundesland(calculation.getRegistrationOffice()).getRegionFactor();
 
         return kilometerFactor * vehicleFactor * regionFactor;
     }
@@ -67,13 +67,16 @@ public class InsuranceCalculationService {
     }
 
     public Optional<InsuranceCalculationDTO> update(Long id, InsuranceCalculationDTO insuranceCalculationDTO) {
-        return repository.findById(id)
-                .map(existingInsuranceCalculation -> {
-                    InsuranceCalculation updatedInsuranceCalculation = toEntity(insuranceCalculationDTO);
-                    updatedInsuranceCalculation.setId(id);
-                    InsuranceCalculation savedInsuranceCalculation = repository.save(updatedInsuranceCalculation);
-                    return Optional.ofNullable(toDTO(savedInsuranceCalculation));
-                }).orElseThrow();
+        Optional<InsuranceCalculation> existingInsuranceCalculation = repository.findById(id);
+        InsuranceCalculation updatedInsuranceCalculation = toEntity(insuranceCalculationDTO);
+        if (existingInsuranceCalculation.isPresent()) {
+
+            updatedInsuranceCalculation.setId(id);
+            Double calculatePremium = calculatePremium(updatedInsuranceCalculation);
+            updatedInsuranceCalculation.setCalculatedPremium(calculatePremium);
+        }
+        InsuranceCalculation savedInsuranceCalculation = repository.save(updatedInsuranceCalculation);
+        return Optional.ofNullable(toDTO(savedInsuranceCalculation));
     }
 
     public void delete(Long id) {
