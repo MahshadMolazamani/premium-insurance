@@ -22,11 +22,14 @@ import static org.springframework.http.ResponseEntity.notFound;
 
 @RestController
 @RequestMapping("/insurance")
-@RequiredArgsConstructor
 @Tag(name = "Insurance Calculation", description = "API for calculating insurance premium")
 public class InsuranceCalculationController {
 
     private InsuranceCalculationService insuranceCalculationService;
+
+    public InsuranceCalculationController(InsuranceCalculationService insuranceCalculationService) {
+        this.insuranceCalculationService = insuranceCalculationService;
+    }
 
     @PostMapping("/calculate")
     @Operation(summary = "Calculate a new Insurance")

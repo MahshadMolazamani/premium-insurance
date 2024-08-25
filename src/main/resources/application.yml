@@ -18,7 +18,7 @@ spring:
     defer-datasource-initialization: true
     show-sql: true
     hibernate:
-      ddl-auto: create
+      ddl-auto: update
     properties:
       javax:
         persistence:
@@ -41,4 +41,4 @@ spring:
       on-profile: test
   jpa:
     hibernate:
-      ddl-auto: create
+      ddl-auto: update
