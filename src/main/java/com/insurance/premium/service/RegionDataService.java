@@ -13,16 +13,31 @@ import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Service-Klasse zur Verwaltung von RegionData-Entitäten.
+ * Diese Klasse enthält Logik zum Massenimport von Regionsdaten aus einer CSV-Datei.
+ */
 @Service
 @Log4j2
 public class RegionDataService {
 
     private final RegionDataRepository regionDataRepository;
 
+    /**
+     * Konstruktor zur Injektion des RegionDataRepository.
+     *
+     * @param regionDataRepository Repository für die RegionData-Entitäten.
+     */
     public RegionDataService(RegionDataRepository regionDataRepository) {
         this.regionDataRepository = regionDataRepository;
     }
 
+    /**
+     * Führt einen Massenimport von RegionData-Entitäten aus einer CSV-Datei durch.
+     * Die CSV-Datei wird zeilenweise gelesen und die Daten werden in die Datenbank eingefügt.
+     *
+     * @param csvFilePath Der Pfad zur CSV-Datei, die die RegionData-Daten enthält.
+     */
     @Transactional
     public void bulkInsertFromCSV(Path csvFilePath) {
         try (BufferedReader reader = Files.newBufferedReader(csvFilePath)) {

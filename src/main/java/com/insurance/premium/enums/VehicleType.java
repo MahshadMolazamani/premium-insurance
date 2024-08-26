@@ -1,5 +1,9 @@
 package com.insurance.premium.enums;
 
+/**
+ * Dieses Enum repräsentiert verschiedene Fahrzeugtypen mit einem entsprechenden Faktor,
+ * der bei der Berechnung der Versicherungsprämie verwendet wird.
+ */
 public enum VehicleType {
 
     DEFAULT_FACTOR(1.0),
@@ -22,10 +26,20 @@ public enum VehicleType {
 
     private final double vehicleFactor;
 
+    /**
+     * Konstruktor für das Enum VehicleType.
+     *
+     * @param vehicleFactor Der Faktor, der bei der Berechnung der Versicherungsprämie für diesen Fahrzeugtyp verwendet wird.
+     */
     VehicleType(double vehicleFactor) {
         this.vehicleFactor = vehicleFactor;
     }
 
+    /**
+     * Gibt den Faktor für den Fahrzeugtyp zurück.
+     *
+     * @return Der Fahrzeugfaktor.
+     */
     public double getVehicleFactor() {
         return vehicleFactor;
     }

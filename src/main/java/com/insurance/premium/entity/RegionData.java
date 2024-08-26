@@ -4,6 +4,10 @@ package com.insurance.premium.entity;
 import jakarta.persistence.*;
 import lombok.Data;
 
+/**
+ * Diese Entitätsklasse repräsentiert Daten zu einer Region.
+ * Sie enthält Informationen wie Bundesland, Land, Stadt und Postleitzahl sowie eine Verknüpfung zur Location.
+ */
 @Entity
 @Data
 @Table(name = "region_data")

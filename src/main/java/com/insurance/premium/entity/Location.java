@@ -5,6 +5,9 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+/**
+ * Diese Entitätsklasse repräsentiert eine geografische Position mit Breitengrad und Längengrad.
+ */
 @Entity
 @Data
 @Table(name = "location")

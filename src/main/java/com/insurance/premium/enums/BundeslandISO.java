@@ -1,5 +1,9 @@
 package com.insurance.premium.enums;
 
+/**
+ * Dieses Enum repräsentiert die verschiedenen Bundesländer in Deutschland
+ * mit einem entsprechenden Regionfaktor, der bei der Berechnung der Versicherungsprämie verwendet wird.
+ */
 public enum BundeslandISO {
 
 
@@ -24,20 +28,41 @@ public enum BundeslandISO {
     private final Double regionFactor;
     private final String bundesland;
 
-
+    /**
+     * Konstruktor für das Enum BundeslandISO.
+     *
+     * @param regionFactor Der Faktor, der bei der Berechnung der Versicherungsprämie für dieses Bundesland verwendet wird.
+     * @param bundesland   Der Name des Bundeslandes.
+     */
     BundeslandISO(Double regionFactor, String bundesland) {
         this.regionFactor = regionFactor;
         this.bundesland = bundesland;
     }
 
+    /**
+     * Gibt den Regionfaktor für das Bundesland zurück.
+     *
+     * @return Der Regionfaktor.
+     */
     public Double getRegionFactor() {
         return regionFactor;
     }
 
+    /**
+     * Gibt den Namen des Bundeslandes zurück.
+     *
+     * @return Der Name des Bundeslandes.
+     */
     public String getBundesland() {
         return bundesland;
     }
 
+    /**
+     * Gibt das BundeslandISO-Enum basierend auf dem Namen des Bundeslandes zurück.
+     *
+     * @param bundesland Der Name des Bundeslandes.
+     * @return Das entsprechende BundeslandISO-Enum oder `DE_DE` als Standard.
+     */
     public static BundeslandISO fromBundesland(String bundesland) {
         for (BundeslandISO iso : BundeslandISO.values()) {
             if (iso.getBundesland().equalsIgnoreCase(bundesland)) {

@@ -4,6 +4,9 @@ import com.insurance.premium.enums.VehicleType;
 import jakarta.persistence.*;
 import lombok.Data;
 
+/**
+ * Entitätsklasse, die eine Versicherungsberechnung darstellt.
+ */
 @Entity
 @Data
 @Table(name = "insurance_calculation")

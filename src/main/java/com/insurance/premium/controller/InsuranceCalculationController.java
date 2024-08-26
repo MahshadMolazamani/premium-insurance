@@ -20,6 +20,10 @@ import java.util.Optional;
 import static org.springframework.http.ResponseEntity.noContent;
 import static org.springframework.http.ResponseEntity.notFound;
 
+
+/**
+ * REST-Controller für die Verarbeitung von Versicherungsberechnungsanfragen.
+ */
 @RestController
 @RequestMapping("/insurance")
 @Tag(name = "Insurance Calculation", description = "API for calculating insurance premium")
@@ -27,10 +31,21 @@ public class InsuranceCalculationController {
 
     private InsuranceCalculationService insuranceCalculationService;
 
+    /**
+     * Konstruktor zur Injektion von Abhängigkeiten.
+     *
+     * @param insuranceCalculationService Service für die Logik der Versicherungsberechnung.
+     */
     public InsuranceCalculationController(InsuranceCalculationService insuranceCalculationService) {
         this.insuranceCalculationService = insuranceCalculationService;
     }
 
+    /**
+     * Endpoint zur Berechnung der Versicherung basierend auf den bereitgestellten Daten.
+     *
+     * @param insuranceCalculationDTO Data Transfer Object mit den Parametern für die Versicherungsberechnung.
+     * @return Die berechnete Versicherungsprämie.
+     */
     @PostMapping("/calculate")
     @Operation(summary = "Calculate a new Insurance")
     @ApiResponses(value = {
@@ -42,7 +57,11 @@ public class InsuranceCalculationController {
                 .map(ResponseEntity::ok)
                 .orElseThrow();
     }
-
+    /**
+     * Endpunkt zum Abrufen aller Versicherungsberechnungen.
+     *
+     * @return Liste aller Versicherungsberechnungen.
+     */
     @GetMapping
     @Operation(summary = "Get all calculated Insurances")
     @ApiResponses(value = {
@@ -53,6 +72,12 @@ public class InsuranceCalculationController {
         return ResponseEntity.ok(calculatedInsurances);
     }
 
+    /**
+     * Endpunkt zum Abrufen einer berechneten Versicherung nach ID.
+     *
+     * @param id Die ID der berechneten Versicherung.
+     * @return Die berechnete Versicherung, falls vorhanden.
+     */
     @GetMapping("/{id}")
     @Operation(summary = "Get a calculated Insurance by ID")
     @ApiResponses(value = {
@@ -65,6 +90,13 @@ public class InsuranceCalculationController {
                 .orElseGet(() -> notFound().build());
     }
 
+    /**
+     * Endpunkt zur Aktualisierung einer berechneten Versicherung nach ID.
+     *
+     * @param id Die ID der zu aktualisierenden Versicherung.
+     * @param insuranceCalculationDTO Data Transfer Object mit den aktualisierten Versicherungsdaten.
+     * @return Die aktualisierte Versicherung, falls vorhanden.
+     */
     @PutMapping("/{id}")
     @Operation(summary = "Update a calculated Insurance by ID")
     @ApiResponses(value = {
@@ -77,6 +109,12 @@ public class InsuranceCalculationController {
                 .orElseGet(() -> ResponseEntity.status(HttpStatus.NOT_FOUND).build());
     }
 
+    /**
+     * Endpunkt zum Löschen einer berechneten Versicherung nach ID.
+     *
+     * @param id Die ID der zu löschenden Versicherung.
+     * @return Eine leere Antwort, falls erfolgreich gelöscht.
+     */
     @DeleteMapping("/{id}")
     @Operation(summary = "Delete a calculated Insurance by ID")
     @ApiResponses(value = {
